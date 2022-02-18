@@ -1,0 +1,23 @@
+{% extends 'base.html' %}\
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+    <div id="search">
+        <div class="d-flex justify-content-center p-4">
+        <img src="{% static 'search/drink.png' %}" style="max-width: 25%; max-height: 25%"/>
+        </div>
+        <form method="POST">
+            <div class="d-flex justify-content-center">
+                {% crispy form %}
+            </div>
+        </form>
+    </div>
+
+    <div id="filter">
+
+    </div>
+
+
+
+{% endblock content %}

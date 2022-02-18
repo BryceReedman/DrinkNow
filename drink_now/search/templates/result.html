@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block search_bar %}
+        <form method="POST">
+        <div class="d-flex justify-content-end">
+            {% crispy form %}
+        </div>
+    </form>
+{% endblock search_bar %}
+
+{% block content %}
+
+    <div class="container">
+    {% if result != None %}
+        <div class="row">
+    {% for drink in result %}
+
+        <div id="drink-{{ forloop.counter }}" class="col card" >
+            <img style="width: 18rem; border-radius: 8px;" src="{{ drink.image_url }}/preview" class="card-img-top mx-auto d-block mt-3 mb-3">
+
+            <div class="card-body">
+            <h5 id="drink-name" class="card-title">{{ drink.name }} </h5>
+            <h7 class="card-title">Instructions</h7>
+        <p class="card-text" id="instructions">{{ drink.instructions }}</p>
+        <ul id="ingredients">
+        {% for ingredient, measurement in drink.recipe.items %}
+            {% if measurement == None %}
+                <li> {{ ingredient }}</li>
+
+            {% else %}
+                <li> {{ ingredient }} - {{ measurement }}</li>
+            {% endif %}
+        {% endfor %}
+        </ul>
+        </div>
+        </div>
+
+    {% if forloop.counter|divisibleby:3 and not forloop.last and not forloop.first%}
+        </div>
+        <div class="row">
+    {% endif %}
+    {% if forloop.last%}
+    </div>
+    {% endif %}
+
+    {% endfor %}
+    {% else%}
+        <div>
+        <form method="POST">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+        </div>
+    {% endif %}
+    </div>
+{% endblock content %}
+
