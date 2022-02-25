@@ -16,6 +16,11 @@ def search(request):
             search_term = form.cleaned_data.get('search_term')
             result = cocktailDB.search_by_name(search_term)
             return render(request, 'result.html', {'result': result, 'form': form})
+        else:
+            form = SearchForm
+            return render(request, 'search.html', {'form': form})
+
+
     else:
         form = SearchForm
         return render(request, 'search.html', {'form': form})

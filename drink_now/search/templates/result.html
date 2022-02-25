@@ -45,14 +45,6 @@
     {% endif %}
 
     {% endfor %}
-    {% else%}
-        <div>
-        <form method="POST">
-        {% csrf_token %}
-        {{ form }}
-        <button type="submit" class="btn btn-primary">Search</button>
-        </form>
-        </div>
     {% endif %}
     </div>
 {% endblock content %}

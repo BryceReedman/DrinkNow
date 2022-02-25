@@ -2,10 +2,16 @@ from crispy_forms.bootstrap import InlineCheckboxes
 from django import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Row, Column, Layout, Div
-
+from multi_value_field import MultiValueField
 
 class SearchForm(forms.Form):
+
+    def empty(self):
+        pass
+
+
     search_term = forms.CharField(label='',widget=forms.TextInput(attrs={'size':80}))
+    tags = MultiValueField(forms.CharField(), "taggles")
 
     def __init__(self, *args, **kwargs):
         self.helper = FormHelper()
