@@ -14,7 +14,10 @@ def search(request):
         form = SearchForm(request.POST)
         if form.is_valid():
             search_term = form.cleaned_data.get('search_term')
-            result = cocktailDB.search_by_name(search_term)
+            if form.cleaned_data['tags'] is not None:
+                result = cocktailDB.search_by_multi_ingredient(form.cleaned_data['tags'])
+            else:
+                result = cocktailDB.search_by_name(search_term)
             return render(request, 'result.html', {'result': result, 'form': form})
         else:
             form = SearchForm

@@ -10,7 +10,7 @@ class SearchForm(forms.Form):
         pass
 
 
-    search_term = forms.CharField(label='',widget=forms.TextInput(attrs={'size':80}))
+    search_term = forms.CharField(required=False, label='',widget=forms.TextInput(attrs={'size':80}))
     tags = MultiValueField(forms.CharField(), "taggles")
 
     def __init__(self, *args, **kwargs):

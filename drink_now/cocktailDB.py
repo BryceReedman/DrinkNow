@@ -56,10 +56,10 @@ def search_by_ID(name):
 def search_by_multi_ingredient(ingredients):
     link = 'http://www.thecocktaildb.com/api/json/v1/1/filter.php?i='
     for ingredient in ingredients:
-        link = link + ingredient.replace(" ", "_") + ','
+        link = link + urllib.parse.quote(ingredient).replace(" ", "_") + ','
 
     link = link[:-1]
-    return getDrinks(urllib.parse.quote(link))
+    return getDrinks(link)
 
 def search_by_popular():
     return getDrinks("http://www.thecocktaildb.com/api/json/v1/1/popular.php")
